@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local Store</title>
+    <style>
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .product {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1><b><center>Shopping Mart</center></b></h1>
+
+    <div class="product-container">
+        {% for product in products %}
+            <div class="product">
+                <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}">
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.description }}</p>
+                <p>₹{{ product.price }}</p>
+                <a href="{{ url_for('add_to_cart', product_id=product.id) }}">Add to Cart</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <br>
+    <a href="{{ url_for('cart') }}">View Cart</a>
+</body>
+</html>
